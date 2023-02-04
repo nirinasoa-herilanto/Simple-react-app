@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppStore } from '@project/store';
-import { Button, Portal, Modal } from '@project/components';
+import { Button, Portal, Modal, Paragraph } from '@project/components';
 
 const Homepage: React.FC = () => {
   const { message, openModal, isModalOpen } = useAppStore();
@@ -9,17 +9,25 @@ const Homepage: React.FC = () => {
   return (
     <HomepageWrapper className="homepage">
       <h1>{message}</h1>
+      <div className="homepage__content">
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis,
+          soluta nihil libero eum maxime dicta est? Reprehenderit sit magni
+          ducimus error minima quos quo deserunt. Iste assumenda et rem
+          temporibus?
+        </p>
+      </div>
       <Button txt="Click me" fn={isModalOpen} />
 
       {openModal && (
         <Portal>
           <Modal fn={isModalOpen} heightModal>
-            <p>
+            <Paragraph>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Corporis, soluta nihil libero eum maxime dicta est? Reprehenderit
               sit magni ducimus error minima quos quo deserunt. Iste assumenda
               et rem temporibus?
-            </p>
+            </Paragraph>
           </Modal>
         </Portal>
       )}
@@ -35,6 +43,18 @@ const HomepageWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .homepage__content {
+      margin: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .homepage__content {
+        width: 500px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+    }
   }
 `;
 

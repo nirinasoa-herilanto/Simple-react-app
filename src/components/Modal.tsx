@@ -82,7 +82,7 @@ const ModalWrapper = styled.div`
       height: 100%;
       position: absolute;
 
-      background: rgba(0, 0, 0, 0.6);
+      background: ${({ theme }) => theme.overlay};
       backdrop-filter: blur(3px);
       transition: all 0.5s;
     }

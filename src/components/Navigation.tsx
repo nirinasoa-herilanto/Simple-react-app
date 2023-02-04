@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaMoon } from 'react-icons/fa';
+import { FiSun } from 'react-icons/fi';
 import { useAppStore } from '@project/store';
 
 interface NavigationProps {
@@ -9,7 +10,7 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ className }) => {
-  const { isSideDrawerOpen } = useAppStore();
+  const { isSideDrawerOpen, isDark, switchMode } = useAppStore();
 
   return (
     <NavigationWrapper className={`navigation ${className || ''}`}>
@@ -32,6 +33,12 @@ const Navigation: React.FC<NavigationProps> = ({ className }) => {
           </ul>
         </div>
 
+        {isDark ? (
+          <FiSun className="icon" onClick={switchMode} />
+        ) : (
+          <FaMoon className="icon" onClick={switchMode} />
+        )}
+
         <FaBars className="nav__icon" onClick={isSideDrawerOpen} />
       </nav>
     </NavigationWrapper>
@@ -42,7 +49,7 @@ const NavigationWrapper = styled.header`
   &.navigation {
     width: 100%;
     height: 56px;
-    background: var(--zinc-50);
+    background: ${({ theme }) => theme.bgNav};
     box-shadow: 2px 4px 14px rgb(0, 0, 0, 0.2);
 
     .nav__icon {
@@ -51,6 +58,14 @@ const NavigationWrapper = styled.header`
       cursor: pointer;
       margin-right: 30px;
       display: block;
+    }
+
+    .icon {
+      font-size: 18px;
+      color: #ffa900;
+      cursor: pointer;
+      margin-left: 30px;
+      margin-right: 30px;
     }
 
     .nav__spacer {
@@ -66,7 +81,7 @@ const NavigationWrapper = styled.header`
     .nav__logo {
       font-size: 24px;
       font-weight: bold;
-      color: var(--zinc);
+      color: ${({ theme }) => theme.logo};
       margin-left: 20px;
     }
 
@@ -82,7 +97,7 @@ const NavigationWrapper = styled.header`
     }
 
     .nav__lists--to {
-      color: var(--zinc);
+      color: ${({ theme }) => theme.logo};
       padding: 0 10px;
       text-decoration: none;
     }

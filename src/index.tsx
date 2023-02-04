@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import GlobalStyle from './styles/GlobalStyle';
 import AppStoreProvider from '@project/store';
 import { Layout } from '@project/components';
 
@@ -14,7 +13,6 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <AppStoreProvider>
-        <GlobalStyle />
         <Layout>
           <App />
         </Layout>

@@ -13,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
 
-    background: var(--white);
+    background:${({ theme }: any) => theme.bg};
   }
 
   h1 {
@@ -22,9 +22,11 @@ const GlobalStyle = createGlobalStyle`
   }
 
   p {
-    color: var(--zinc);
     font-size: 18px;
+    color: ${({ theme }: any) => theme.paragraph};
+    text-align: justify;
   }
+
 `;
 
 export default GlobalStyle;
