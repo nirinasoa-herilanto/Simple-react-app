@@ -63,7 +63,7 @@ const ModalWrapper = styled.div`
       overflow: auto;
       position: relative;
 
-      background: var(--white);
+      background: ${({ theme }: any) => theme.bg};
       z-index: 25;
     }
 
@@ -72,6 +72,7 @@ const ModalWrapper = styled.div`
     }
 
     .modal__btn {
+      top: 10px;
       right: 20px;
       position: absolute;
     }

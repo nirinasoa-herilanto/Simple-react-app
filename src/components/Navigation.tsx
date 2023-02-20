@@ -81,7 +81,7 @@ const NavigationWrapper = styled.header`
     .nav__logo {
       font-size: 24px;
       font-weight: bold;
-      color: ${({ theme }) => theme.logo};
+      color: ${({ theme }) => theme.text};
       margin-left: 20px;
     }
 
@@ -97,7 +97,7 @@ const NavigationWrapper = styled.header`
     }
 
     .nav__lists--to {
-      color: ${({ theme }) => theme.logo};
+      color: ${({ theme }) => theme.text};
       padding: 0 10px;
       text-decoration: none;
     }

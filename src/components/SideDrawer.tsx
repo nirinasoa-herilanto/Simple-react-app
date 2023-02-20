@@ -51,7 +51,7 @@ const SideDrawerWrapper = styled.div`
       width: 350px;
       height: 100vh;
       position: fixed;
-      background: #e6e6e6;
+      background: ${({ theme }) => theme.bgNav};
       transform: translateX(100%);
       transition: transform ease-in-out 0.5s;
       z-index: 20;
@@ -71,7 +71,7 @@ const SideDrawerWrapper = styled.div`
     }
 
     .nav__lists--to {
-      color: var(--zinc);
+      color: ${({ theme }) => theme.text};
       padding: 0 10px;
       text-decoration: none;
     }
@@ -82,7 +82,7 @@ const SideDrawerWrapper = styled.div`
       height: 100%;
       position: fixed;
 
-      background: rgba(0, 0, 0, 0.6);
+      background: ${({ theme }) => theme.overlay};
       backdrop-filter: blur(3px);
       transition: all 0.5s;
       z-index: 10;

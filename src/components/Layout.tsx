@@ -16,7 +16,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     bg: '#fafafa',
     bgNav: '#fafafa',
     paragraph: ' #18181b',
-    logo: '#18181b',
+    text: '#18181b',
     overlay: 'rgba(0, 0, 0, 0.6)',
   };
 
@@ -24,7 +24,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     bg: '#37383d',
     bgNav: '#1d202d',
     paragraph: '#fafafa',
-    logo: '#fafafa',
+    text: '#fafafa',
     overlay: 'rgba(255, 255, 255, 0.4)',
   };
 
