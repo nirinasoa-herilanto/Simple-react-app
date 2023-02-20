@@ -1,14 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useAppStore } from '@project/store';
-import { Button, Portal, Modal, Paragraph } from '@project/components';
+import { Button, Portal, Modal, Rating } from '@project/components';
 
 const Homepage: React.FC = () => {
+  const [rating, setRating] = React.useState(0);
+  const [showRating, setShowRating] = React.useState(false);
   const { message, openModal, isModalOpen } = useAppStore();
+
+  const displayRating = () => setShowRating(!showRating);
 
   return (
     <HomepageWrapper className="homepage">
       <h1>{message}</h1>
+
+      {showRating && (
+        <Rating rate={rating} fn={setRating} overrides={showRating} />
+      )}
+
+      <span className="note" onClick={displayRating}>
+        Add a note {rating} notes
+      </span>
+
       <div className="homepage__content">
         <p>
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis,
@@ -22,12 +35,12 @@ const Homepage: React.FC = () => {
       {openModal && (
         <Portal>
           <Modal fn={isModalOpen} heightModal>
-            <Paragraph>
+            <p>
               Lorem, ipsum dolor sit amet consectetur adipisicing elit.
               Corporis, soluta nihil libero eum maxime dicta est? Reprehenderit
               sit magni ducimus error minima quos quo deserunt. Iste assumenda
               et rem temporibus?
-            </Paragraph>
+            </p>
           </Modal>
         </Portal>
       )}
@@ -46,6 +59,14 @@ const HomepageWrapper = styled.div`
 
     .homepage__content {
       margin: 20px;
+    }
+
+    .note {
+      color: ${({ theme }: any) => theme.paragraph};
+      font-weight: bold;
+      margin-top: 14px;
+      margin-bottom: 20px;
+      cursor: pointer;
     }
 
     @media (min-width: 768px) {
