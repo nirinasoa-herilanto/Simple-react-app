@@ -1,6 +1,9 @@
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { FaTimes } from 'react-icons/fa';
+import Overlay from './Overlay/Overlay';
+import { useAppStore } from '@project/store';
+import Portal from '../Portal';
 
 interface ModalProps {
   classname?: boolean;
@@ -8,6 +11,8 @@ interface ModalProps {
   children: ReactNode | ReactNode[];
   fn: () => void;
 }
+
+const modalRoot = document.getElementById('modal-root') as HTMLElement;
 
 /**
  * Modal component
@@ -19,24 +24,28 @@ const Modal: React.FC<ModalProps> = ({
   heightModal = false,
   fn,
 }) => {
+  const { isDark, isModalOpen } = useAppStore();
+
   return (
-    <ModalWrapper className={`modal ${classname || ''}`}>
-      <div
-        className={`modal__content ${
-          heightModal ? 'modal__content--height' : ''
-        }`}
-      >
-        <FaTimes
-          className="modal__btn"
-          size={24}
-          cursor="pointer"
-          color="#dc2626"
-          onClick={fn}
-        />
-        {children}
-      </div>
-      <div className="overlay" onClick={fn}></div>
-    </ModalWrapper>
+    <Portal markupTo={modalRoot}>
+      <ModalWrapper className={`modal ${classname || ''}`}>
+        <div
+          className={`modal__content ${
+            heightModal ? 'modal__content--height' : ''
+          }`}
+        >
+          <FaTimes
+            className="modal__btn"
+            size={24}
+            cursor="pointer"
+            color="#dc2626"
+            onClick={fn}
+          />
+          {children}
+        </div>
+        <Overlay isDarkMode={isDark} onClick={isModalOpen} />
+      </ModalWrapper>
+    </Portal>
   );
 };
 

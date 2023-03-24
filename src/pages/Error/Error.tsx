@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-const Error: React.FC = () => {
-  const errorMessage = '404 | Ressource not found.';
+import { errorWording } from './error.wording';
 
+const Error: React.FC = () => {
   useEffect(() => {
-    document.title = errorMessage;
+    document.title = errorWording.errorMessage;
   }, []);
 
   return (
     <ErrorWrapper className="error">
-      <span className="error__message">{errorMessage}</span>
+      <span className="error__message">{errorWording.errorMessage}</span>
     </ErrorWrapper>
   );
 };

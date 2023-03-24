@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { FaBars, FaMoon } from 'react-icons/fa';
+
 import { FiSun } from 'react-icons/fi';
+
+import { FaBars, FaMoon } from 'react-icons/fa';
 import { useAppStore } from '@project/store';
+
+import NavLists from './NavLists';
 
 interface NavigationProps {
   className?: string;
@@ -15,22 +18,11 @@ const Navigation: React.FC<NavigationProps> = ({ className }) => {
   return (
     <NavigationWrapper className={`navigation ${className || ''}`}>
       <nav className="nav">
-        <div className="nav__logo">React App</div>
+        <div className="nav__logo">Simple App</div>
         <div className="nav__spacer" />
 
         <div className="nav__items">
-          <ul className="nav__lists">
-            <li>
-              <Link className="nav__lists--to" to={'/#overviews'}>
-                Overviews
-              </Link>
-            </li>
-            <li>
-              <Link className="nav__lists--to" to={'/#about'}>
-                About
-              </Link>
-            </li>
-          </ul>
+          <NavLists />
         </div>
 
         {isDark ? (
@@ -87,19 +79,6 @@ const NavigationWrapper = styled.header`
 
     .nav__items {
       display: none;
-    }
-
-    .nav__lists {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-    }
-
-    .nav__lists--to {
-      color: ${({ theme }) => theme.text};
-      padding: 0 10px;
-      text-decoration: none;
     }
 
     @media (min-width: 768px) {

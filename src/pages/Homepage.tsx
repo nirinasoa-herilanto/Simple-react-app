@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppStore } from '@project/store';
-import { Button, Portal, Modal, Rating } from '@project/components';
+import { Button, Rating } from '@project/components';
 
-const Homepage: React.FC = () => {
+const HomePage: React.FC = () => {
   const [rating, setRating] = React.useState(0);
   const [showRating, setShowRating] = React.useState(false);
-  const { message, openModal, isModalOpen } = useAppStore();
 
-  const displayRating = () => setShowRating(!showRating);
+  const { message, isModalOpen } = useAppStore();
+
+  const displayRating = () => setShowRating((prevState) => !prevState);
+
+  useEffect(() => {
+    document.title = 'Homepage';
+  }, []);
 
   return (
-    <HomepageWrapper className="homepage">
+    <HomePageWrapper className="homepage">
       <h1>{message}</h1>
 
       {showRating && (
@@ -30,25 +35,13 @@ const Homepage: React.FC = () => {
           temporibus?
         </p>
       </div>
-      <Button txt="Click me" fn={isModalOpen} />
 
-      {openModal && (
-        <Portal>
-          <Modal fn={isModalOpen} heightModal>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Corporis, soluta nihil libero eum maxime dicta est? Reprehenderit
-              sit magni ducimus error minima quos quo deserunt. Iste assumenda
-              et rem temporibus?
-            </p>
-          </Modal>
-        </Portal>
-      )}
-    </HomepageWrapper>
+      <Button onClick={isModalOpen}>Open modal</Button>
+    </HomePageWrapper>
   );
 };
 
-const HomepageWrapper = styled.div`
+const HomePageWrapper = styled.div`
   &.homepage {
     width: 100%;
     height: 100vh;
@@ -79,4 +72,4 @@ const HomepageWrapper = styled.div`
   }
 `;
 
-export default Homepage;
+export default HomePage;

@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { FaTimes } from 'react-icons/fa';
+
 import { useAppStore } from '@project/store';
+
+import { FaTimes } from 'react-icons/fa';
+import NavLists from './NavLists';
 
 interface SideDrawerProps {
   className?: React.ReactNode;
@@ -22,18 +24,7 @@ const SideDrawer: React.FC<SideDrawerProps> = ({ className }) => {
           onClick={isSideDrawerOpen}
         />
 
-        <ul className="nav__lists">
-          <li>
-            <Link className="nav__lists--to" to={'/#overviews'}>
-              Overviews
-            </Link>
-          </li>
-          <li>
-            <Link className="nav__lists--to" to={'/#about'}>
-              About
-            </Link>
-          </li>
-        </ul>
+        <NavLists />
       </nav>
       <div
         className={`overlay ${openSideDrawer ? 'open' : ''}`}
@@ -59,21 +50,6 @@ const SideDrawerWrapper = styled.div`
 
     .sidenav__icon {
       margin: 12px;
-    }
-
-    .nav__lists {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .nav__lists--to {
-      color: ${({ theme }) => theme.text};
-      padding: 0 10px;
-      text-decoration: none;
     }
 
     .overlay {
