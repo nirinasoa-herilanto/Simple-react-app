@@ -11,6 +11,10 @@ const HomePage: React.FC = () => {
 
   const displayRating = () => setShowRating((prevState) => !prevState);
 
+  const submitRatingHandler = (val: number) => {
+    setRating(val);
+  };
+
   useEffect(() => {
     document.title = 'Homepage';
   }, []);
@@ -20,7 +24,11 @@ const HomePage: React.FC = () => {
       <h1>{message}</h1>
 
       {showRating && (
-        <Rating rate={rating} fn={setRating} overrides={showRating} />
+        <Rating
+          value={rating}
+          onSubmitRating={submitRatingHandler}
+          overides={showRating}
+        />
       )}
 
       <span className="note" onClick={displayRating}>
