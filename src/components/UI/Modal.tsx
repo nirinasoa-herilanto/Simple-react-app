@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   heightModal = false,
   fn,
 }) => {
-  const { isDark, isModalOpen } = useAppStore();
+  const { theme, isModalOpen } = useAppStore();
 
   return (
     <Portal markupTo={modalRoot}>
@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({
           />
           {children}
         </div>
-        <Overlay isDarkMode={isDark} onClick={isModalOpen} />
+        <Overlay isDarkMode={theme !== 'light'} onClick={isModalOpen} />
       </ModalWrapper>
     </Portal>
   );

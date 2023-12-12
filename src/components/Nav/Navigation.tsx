@@ -12,8 +12,11 @@ interface NavigationProps {
   className?: string;
 }
 
+/**
+ * Use to display Navigation on UI
+ */
 const Navigation: React.FC<NavigationProps> = ({ className }) => {
-  const { isSideDrawerOpen, isDark, switchMode } = useAppStore();
+  const { isSideDrawerOpen, theme, switchModeHandler } = useAppStore();
 
   return (
     <NavigationWrapper className={`navigation ${className || ''}`}>
@@ -25,10 +28,16 @@ const Navigation: React.FC<NavigationProps> = ({ className }) => {
           <NavLists />
         </div>
 
-        {isDark ? (
-          <FiSun className="icon" onClick={switchMode} />
+        {theme !== 'light' ? (
+          <FiSun
+            className="icon"
+            onClick={switchModeHandler.bind(null, 'light')}
+          />
         ) : (
-          <FaMoon className="icon" onClick={switchMode} />
+          <FaMoon
+            className="icon"
+            onClick={switchModeHandler.bind(null, 'dark')}
+          />
         )}
 
         <FaBars className="nav__icon" onClick={isSideDrawerOpen} />

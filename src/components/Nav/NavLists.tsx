@@ -14,12 +14,25 @@ export type NavListsProps = {
  * - use to display navigation item
  */
 const NavLists: React.FC<NavListsProps> = ({ className }) => {
-  const { isDark } = useAppStore();
+  const { theme } = useAppStore();
 
   return (
     <NavListsWrapper className={`nav-lists ${className || ''}`}>
-      <NavItem navLabel="Overview" linkTo="/#overviews" isDarkMode={isDark} />
-      <NavItem navLabel="About" linkTo="/about" isDarkMode={isDark} />
+      <NavItem
+        navLabel="Overview"
+        linkTo="/#overviews"
+        isDarkMode={theme !== 'light'}
+      />
+      <NavItem
+        navLabel="About"
+        linkTo="/about"
+        isDarkMode={theme !== 'light'}
+      />
+      <NavItem
+        navLabel="Meetup"
+        linkTo="/meetup"
+        isDarkMode={theme !== 'light'}
+      />
     </NavListsWrapper>
   );
 };

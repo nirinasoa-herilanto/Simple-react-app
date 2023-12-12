@@ -9,6 +9,9 @@ export type NavItemProps = {
   isDarkMode?: boolean;
 } & JSX.IntrinsicElements['li'];
 
+/**
+ * Use to create a custom link navigation
+ */
 const NavItem: React.FC<NavItemProps> = ({
   className,
   navLabel,

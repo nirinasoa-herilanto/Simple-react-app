@@ -14,7 +14,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isDark, openModal, isModalOpen } = useAppStore();
+  const { theme, openModal, isModalOpen } = useAppStore();
 
   const lightMode = {
     bg: '#fafafa',
@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <ThemeProvider theme={isDark ? darkMode : lightMode}>
+    <ThemeProvider theme={theme !== 'light' ? darkMode : lightMode}>
       <React.Fragment>
         <GlobalStyle />
         <Navigation />

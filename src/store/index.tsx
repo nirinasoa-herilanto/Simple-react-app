@@ -16,13 +16,15 @@ interface IAppContext {
   message: string;
   openModal: boolean;
   openSideDrawer: boolean;
-  isDark: boolean;
+  theme: string;
   isModalOpen: () => void;
   isSideDrawerOpen: () => void;
-  switchMode: () => void;
+  switchModeHandler: (item: string) => void;
 }
 
 const AppStoreContext = createContext<IAppContext>({} as IAppContext);
+
+const initialThemeState = localStorage.getItem('theme') || 'light';
 
 const AppStoreProvider: React.FC<AppProviderProps> = ({
   children,
@@ -30,10 +32,9 @@ const AppStoreProvider: React.FC<AppProviderProps> = ({
 }) => {
   // State
 
-  // const [theme, setTheme] = useState<string>('')
+  const [theme, setTheme] = useState<string>(initialThemeState);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [openSideDrawer, setOpenSideDrawer] = useState<boolean>(false);
-  const [isDark, setIsDark] = useState<boolean>(false);
 
   const message = `Welcome to my simple react app.`;
 
@@ -41,23 +42,13 @@ const AppStoreProvider: React.FC<AppProviderProps> = ({
   const isModalOpen = () => setOpenModal((prevState) => !prevState);
   const isSideDrawerOpen = () => setOpenSideDrawer((prevState) => !prevState);
 
-  const switchMode = () => {
-    const theme = localStorage.getItem('theme') as string;
-
-    if (theme !== 'dark') {
-      localStorage.setItem('theme', 'dark');
-      setIsDark(!isDark);
-    } else {
-      localStorage.setItem('theme', 'light');
-      setIsDark(!isDark);
-    }
+  const switchModeHandler = (item: string) => {
+    setTheme(item);
   };
 
   useEffect(() => {
-    (localStorage.getItem('theme') as string) !== 'dark'
-      ? setIsDark(false)
-      : setIsDark(true);
-  }, []);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const value = {
     parentProps: rest,
@@ -65,9 +56,9 @@ const AppStoreProvider: React.FC<AppProviderProps> = ({
     openModal,
     openSideDrawer,
     isModalOpen,
-    isDark,
+    theme,
     isSideDrawerOpen,
-    switchMode,
+    switchModeHandler,
   } as IAppContext;
 
   return (
